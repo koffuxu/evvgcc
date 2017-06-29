@@ -216,17 +216,17 @@ void draw() {
     textSize(12);
     text(readStatus,110,263);
 
-    if(PitchP.value()==0)PitchP.setValue(0.01);
-    if(RollP.value()==0)RollP.setValue(0.01);
-    if(YawP.value()==0)YawP.setValue(0.01);
+    if(PitchP.getValue()==0)PitchP.setValue(0.01);
+    if(RollP.getValue()==0)RollP.setValue(0.01);
+    if(YawP.getValue()==0)YawP.setValue(0.01);
 
-    if(PitchD.value()==0)PitchD.setValue(0.01);
-    if(RollD.value()==0)RollD.setValue(0.01);
-    if(YawD.value()==0)YawD.setValue(0.01);
+    if(PitchD.getValue()==0)PitchD.setValue(0.01);
+    if(RollD.getValue()==0)RollD.setValue(0.01);
+    if(YawD.getValue()==0)YawD.setValue(0.01);
 
-    if(PitchPWR.value()==0)PitchPWR.setValue(1);
-    if(RollPWR.value()==0)RollPWR.setValue(1);
-    if(YawPWR.value()==0)YawPWR.setValue(1);
+    if(PitchPWR.getValue()==0)PitchPWR.setValue(1);
+    if(RollPWR.getValue()==0)RollPWR.setValue(1);
+    if(YawPWR.getValue()==0)YawPWR.setValue(1);
 
     //if(RollCal.value()==-9.9)RollCal.setValue(-9.9);
 
@@ -238,22 +238,22 @@ public void WRITE() {
 
   myPort.write("h");
 
-  myPort.write (int (PitchP.value()*100));
-  myPort.write (int (RollP.value()*100));
-  myPort.write (int (YawP.value()*100));
+  myPort.write (int (PitchP.getValue()*100));
+  myPort.write (int (RollP.getValue()*100));
+  myPort.write (int (YawP.getValue()*100));
 
-  myPort.write (int (PitchD.value()*100));
-  myPort.write (int (RollD.value()*100));
-  myPort.write (int (YawD.value()*100));
+  myPort.write (int (PitchD.getValue()*100));
+  myPort.write (int (RollD.getValue()*100));
+  myPort.write (int (YawD.getValue()*100));
 
-  myPort.write (int (PitchPWR.value()));
-  myPort.write (int (RollPWR.value()));
-  myPort.write (int (YawPWR.value()));
+  myPort.write (int (PitchPWR.getValue()));
+  myPort.write (int (RollPWR.getValue()));
+  myPort.write (int (YawPWR.getValue()));
 
   myPort.write (RCcontrol);
   myPort.write (YawRCon);
 
-  myPort.write (int (RollCal.value()*10+100));
+  myPort.write (int (RollCal.getValue()*10+100));
   //println (RollCal.value());
   //println (int (RollCal.value()*10+100));
 
@@ -392,10 +392,3 @@ public void ZERO() {
   //println (int (RollCal.value()*10+100));
 
 }
-
-
-
-
-
-
-
