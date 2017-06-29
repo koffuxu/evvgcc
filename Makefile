@@ -11,7 +11,8 @@
 # toolchain configuration
 #=============================================================================#
 
-TOOLCHAIN = arm-none-eabi-
+#TOOLCHAIN = arm-none-eabi-
+TOOLCHAIN = /home/andbase/workspace/zt/Evvgc/tools/gcc-arm-none-eabi-6-2017-q1-update/bin/arm-none-eabi-
 
 CXX = $(TOOLCHAIN)g++
 CC = $(TOOLCHAIN)gcc
