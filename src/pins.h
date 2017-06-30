@@ -11,8 +11,10 @@
 #define LED1_PIN        GPIO_Pin_12
 #define LED1_PORT       GPIOB
 
-#define LED2_PIN        GPIO_Pin_3
-#define LED2_PORT       GPIOA
+//#define LED2_PIN        GPIO_Pin_3
+//#define LED2_PORT       GPIOA
+#define LED2_PIN        GPIO_Pin_13
+#define LED2_PORT       GPIOB
 
 #define I2C_SDA_PIN     GPIO_Pin_11
 #define I2C_SDA_PORT    GPIOB

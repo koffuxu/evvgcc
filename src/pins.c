@@ -11,6 +11,25 @@
 void GPIO_Config(void)  //Configures GPIO
 {
     GPIO_InitTypeDef    GPIO_InitStructure;
+	//1, init Pictch Motor
+	/**
+ * STrom32 PWMMOTOR Vctor
+    Mot0: Pitch motor to point the camera up/down   =   PB1,PB0,PA7 = TIM3-CH4,TIM3-CH3,TIM3-CH2
+    Mot1: Roll motor to stabilize the horizon       =   PA6,PA3,PA2 = TIM3-CH1,TIM2-CH4,TIM2-CH3
+    Mot2: Yaw motor to turn the camera left/right   =   PB9,PA1,PB8 = TIM4-CH4,TIM2-CH2,TIM4-CH3
+ */
+ 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    	GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+ 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	
+	/****koffuxu
+	
     //TIMER1 pin config//////////////////////////////////////////////////////////
     //
 #ifdef DISABLE_PA10
@@ -59,7 +78,7 @@ void GPIO_Config(void)  //Configures GPIO
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
     //////////////////////////////////////////////////////////////////////////////
-
+*/
 
 
 

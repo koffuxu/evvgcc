@@ -146,7 +146,8 @@ void setup(void)
     }
 
     print("init RC...\r\n");
-    RC_Config();
+    //sued Tim3, mask first
+    //RC_Config();
 
     InitSinArray();
 

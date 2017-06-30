@@ -296,10 +296,12 @@ static void Timer_Channel_Config(TIM_TypeDef *tim, TIM_OCInitTypeDef *OCInitStru
     TIM_OC1Init(tim, OCInitStructure);
     TIM_OC2Init(tim, OCInitStructure);
     TIM_OC3Init(tim, OCInitStructure);
+    TIM_OC4Init(tim, OCInitStructure);
 
     TIM_OC1PreloadConfig(tim, TIM_OCPreload_Enable);
     TIM_OC2PreloadConfig(tim, TIM_OCPreload_Enable);
     TIM_OC3PreloadConfig(tim, TIM_OCPreload_Enable);
+    TIM_OC4PreloadConfig(tim, TIM_OCPreload_Enable);
 }
 
 static void Timer_PWM_Advanced_Config(TIM_TypeDef *tim)
@@ -391,18 +393,23 @@ void PWMConfig(void)
     MaxCntClear();
 
     //rewrite that thing;
-    Timer_PWM_Advanced_Config(TIM1);
+   // Timer_PWM_Advanced_Config(TIM1);
+    //for STorM32 koffuxu
+    Timer_PWM_General_Config(TIM3, TIM_OCPolarity_High);
     Timer_PWM_Advanced_Config(TIM8);
 
     Timer_PWM_General_Config(TIM5, TIM_OCPolarity_High);
     Timer_PWM_General_Config(TIM4, TIM_OCPolarity_Low);
 
+
     TIM4->CNT = timer_4_5_deadtime_delay;
-    TIM1->CNT = timer_4_5_deadtime_delay + 3 + PWM_PERIODE / 3;
+    //TIM1->CNT = timer_4_5_deadtime_delay + 3 + PWM_PERIODE / 3;
+    TIM3->CNT = timer_4_5_deadtime_delay + 3 + PWM_PERIODE / 3;
     TIM8->CNT = timer_4_5_deadtime_delay + 5 + PWM_PERIODE * 2 / 3;
 
     SetupPWMIrq(TIM5_IRQn);    // yaw
-    SetupPWMIrq(TIM1_UP_IRQn); // pitch
+    //SetupPWMIrq(TIM1_UP_IRQn); // pitch
+    SetupPWMIrq(TIM3_IRQn); // pitch
     SetupPWMIrq(TIM8_UP_IRQn); // roll
 
     __disable_irq();
@@ -413,17 +420,20 @@ void PWMConfig(void)
         */
         vu32 *tim5Enable = BB_PERIPH_ADDR(&(TIM5->CR1), 0);
         vu32 *tim4Enable = BB_PERIPH_ADDR(&(TIM4->CR1), 0);
-        vu32 *tim1Enable = BB_PERIPH_ADDR(&(TIM1->CR1), 0);
+        //vu32 *tim1Enable = BB_PERIPH_ADDR(&(TIM1->CR1), 0);
+        vu32 *tim3Enable = BB_PERIPH_ADDR(&(TIM3->CR1), 0);
         vu32 *tim8Enable = BB_PERIPH_ADDR(&(TIM8->CR1), 0);
         *tim5Enable = 1;
         *tim4Enable = 1;
-        *tim1Enable = 1;
+        //*tim1Enable = 1;
+        *tim3Enable = 1;
         *tim8Enable = 1;
     }
 
     TIM_CtrlPWMOutputs(TIM5, ENABLE);
     TIM_CtrlPWMOutputs(TIM4, ENABLE);
-    TIM_CtrlPWMOutputs(TIM1, ENABLE);
+    //TIM_CtrlPWMOutputs(TIM1, ENABLE);
+    TIM_CtrlPWMOutputs(TIM3, ENABLE);
     TIM_CtrlPWMOutputs(TIM8, ENABLE);
     __enable_irq();
 }
