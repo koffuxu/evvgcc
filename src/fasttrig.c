@@ -16,7 +16,7 @@ void InitSinArray(void)
     {
         float x = i * M_TWOPI / SINARRAYSIZE;
         sinDataI16[i] = (short int)Round(sinf(x) * SINARRAYSCALE);
-        print("i %3d  x %f  sin %d\r\n", i, x, (int)sinDataI16[i]);
+        //print("i %3d  x %f  sin %d\r\n", i, x, (int)sinDataI16[i]);
     }
 }
 

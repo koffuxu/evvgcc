@@ -164,6 +164,12 @@ void CommHandler(void) //UART4 Interrupt handler implementation
                 testPhase -= 0.1;
                 print("test phase output %5.1f\r\n", testPhase);
                 break;
+				
+	    case 't':
+                print("tim3 register information\r\n");
+		print("TIM3: CR1 = %x; CR2=%x; DIER=%x; CNT=%x; ARR=%x; CCMR2=%x CCR2=%x\r\n",
+			TIM3->CR1,TIM3->CR2,TIM3->DIER,TIM3->CNT,TIM3->ARR,TIM3->CCMR2,TIM3->CCR2);
+                break;
 
 /*
             case '?':

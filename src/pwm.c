@@ -180,7 +180,9 @@ void SetPitchMotor(float phi, int power)
     int pwm[3];
     SetPWM(pwm, phi, power);
     SetPWMData(g_Pitch, pwm);
-    ActivateIRQ(TIM1);
+    //ActivateIRQ(TIM1);
+    ActivateIRQ(TIM3);
+
 }
 
 void SetYawMotor(float phi, int power)
@@ -251,7 +253,8 @@ void TIM5_IRQHandler(void) // yaw axis
     }
 }
 
-void TIM1_UP_IRQHandler(void) // pitch axis
+//void TIM1_UP_IRQHandler(void) // pitch axis
+void TIM3_IRQHandler(void) // pitch axis
 {
     TIM1->SR &= ~TIM_SR_UIF; // clear UIF flag
 
@@ -261,11 +264,17 @@ void TIM1_UP_IRQHandler(void) // pitch axis
 
     if (cnt < MAX_CNT)  // make sure there is enough time to make all changes
     {
-        TIM1->CCR1 = g_Pitch[0];
-        TIM1->CCR2 = g_Pitch[1];
-        TIM1->CCR3 = g_Pitch[2];
+        //TIM1->CCR1 = g_Pitch[0];
+        //TIM1->CCR2 = g_Pitch[1];
+        //TIM1->CCR3 = g_Pitch[2];
 
-        TIM1->DIER &= ~TIM_DIER_UIE; // disable update interrupt
+        //TIM1->DIER &= ~TIM_DIER_UIE; // disable update interrupt
+        //for Tim3
+        TIM3->CCR2 = g_Pitch[0];
+        TIM3->CCR3 = g_Pitch[1];
+        TIM3->CCR4 = g_Pitch[2];
+
+        TIM3->DIER &= ~TIM_DIER_UIE; // disable update interrupt
     }
 
     __enable_irq();
@@ -370,8 +379,9 @@ void PWMOff(void)
     SetPWMData(g_Pitch, pwm);
 
     g_YawOff = 1;
-    TIM5->DIER = TIM_DIER_UIE; // Enable update interrupt
-    TIM1->DIER = TIM_DIER_UIE; // Enable update interrupt
+    TIM5->DIER = TIM_DIER_UIE; // Enable update interrupt,位0 UIE：允许更新中断 (Update interrupt enable)
+    //TIM1->DIER = TIM_DIER_UIE; // Enable update interrupt
+    TIM3->DIER = TIM_DIER_UIE; // Enable update interrupt
     TIM8->DIER = TIM_DIER_UIE; // Enable update interrupt
 }
 

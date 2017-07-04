@@ -16,8 +16,10 @@ enum
 };
 
 #define EULAR 3
-
+//define: 弧长等于半径的弧，其所对的圆心角为1弧度
+//360度= 2pi;  => 1弧度约为57.3度。//180/3.14
 #define R2D 57.3F
+//3.14/180 = 0.0174
 #define D2R 0.01745329
 
 #endif /* DEFINITIONS_H_ */
